@@ -248,34 +248,5 @@ var App = function() {
 	ext.init = init;
 	ext.handleGlobalMessage = handleGlobalMessage;
 
-	// internationalization: i18n
-
-	// if this is the first visit, we need a way to set the language
-	var lngSetting = '',
-		i18nCookieValue = AppSettings.getCookieValue('i18next');
-
-	if (i18nCookieValue == '' || i18nCookieValue == null && sofia.config.defaultLanguage != '') {
-		lngSetting = sofia.config.defaultLanguage;
-	}
-
-	i18n.init({fallbackLng: 'en', lng: lngSetting, resStore: sofia.resources});
-
-	setTimeout(function() {
-
-		var lang = i18n.lng(),
-			langSelector = $('#config-language');
-
-		langSelector.val( lang );
-
-		if (lang != langSelector.val() ) {
-			langSelector.val(  lang.split('-')[0] );
-		}
-
-		if (langSelector[0] && langSelector[0].localizeLanguages) {
-			langSelector[0].localizeLanguages();
-		}
-
-	}, 50);
-
 	return ext;
 };

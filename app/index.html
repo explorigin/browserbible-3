@@ -15,20 +15,22 @@
 	<link rel="stylesheet" href="css/windows.css" />
 	<link rel="stylesheet" href="css/common.css" />
 
-	<!-- jquery -->
-	<script src="js/lib/jquery.min.js" data-build="copy"></script>
+	<!-- common utilities -->
+	<script src="commons.js"></script>
 
 	<!-- app start -->
 	<script src="js/core/namespace.js"></script>
 	<script src="js/core/config-default.js"></script>
+
+	<!-- global namespace utilities -->
+	<script src="globals.bundle.js"></script>
+
 	<script src="js/core/windowmanager.js"></script>
 	<script src="js/core/windowapp.js"></script>
-	<script src="js/core/startup.js"></script>
 
 	<!-- external libraries -->
 	<script src="js/lib/xregexp.js"></script>
 	<script src="js/lib/ZeroClipboard.js"></script>
-	<script src="js/lib/i18next-1.7.2.js"></script>
 	<script src="js/lib/jsdiff.js"></script>
 	<script src="js/resources/en.js"></script>
 	<script src="js/resources/fr.js"></script>
@@ -131,7 +133,6 @@
 	<script src="js/windows/statisticswindow.js"></script>
 	<link rel="stylesheet" href="js/windows/statisticswindow.css" />
 
-
 	<script src="js/windows/deafbiblewindow.js"></script>
 	<link rel="stylesheet" href="js/windows/deafbiblewindow.css" />
 
@@ -157,8 +158,6 @@
 	<script src="js/menu/navigation.js"></script>
 	<link rel="stylesheet" href="js/menu/navigation.css" />
 
-
-
 	<script src="js/menu/config-fontsize.js"></script>
 	<link rel="stylesheet" href="js/menu/config-fontsize.css" />
 	<script src="js/menu/config-fontfamily.js"></script>
@@ -175,6 +174,8 @@
 	<!-- <script src="js/core/config-dbs.js" data-build="copy"></script> -->
 	<script src="js/core/config-custom.js" data-build="copy"></script>
 	<link rel="stylesheet" href="css/custom.css" data-build="copy" />
+
+	<script src="main.bundle.js"></script>
 
 	<noscript><meta http-equiv="refresh" content="1; url=content/texts/"></noscript>
 	<!--[if lte IE 8]>

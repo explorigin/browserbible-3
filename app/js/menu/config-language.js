@@ -36,14 +36,15 @@ var LanguageSetting = function(node) {
 	list.on('change', function() {
 		var newLang = list.val();
 
-		i18n.setLng(newLang);
-		$('.i18n').i18n();
+		i18n.ext.changeLanguage(newLang, function() {
+			$('.i18n').i18n();
 
-		localizeLanguages();
+			localizeLanguages();
+		});
 	});
 
 	function localizeLanguages() {
-		var usersLanguage = i18n.lng();
+		var usersLanguage = i18n.language;
 
 		// go through options and add new info
 		list.children('option').each(function() {
@@ -65,7 +66,6 @@ var LanguageSetting = function(node) {
 			}
 
 			option.html(fullname);
-
 		});
 	}
 
