@@ -1,11 +1,6 @@
-tests/
-tools/textgenerator/ftp-config.js
-tools/textgenerator/input/
-tools/utilities/
-tools/_old/
-content/texts/*.*
-build/
-config-custom.js
+app/build/
+app/js/core/config-custom.js
+app/index.html
 app/commons.js
 app/commons.js.map
 app/globals.bundle.js
