@@ -1,7 +1,15 @@
+import $ from 'jQuery';
 import i18next from 'i18next';
+import i18nextJquery from 'jquery-i18next/lib/index';
 import LanguageDetector from 'i18next-browser-languagedetector/lib/index';
 
 // Internationalization: i18n
+
+i18nextJquery.init(i18next, $, {
+	tName: 't', // --> appends $.t = i18next.t
+	i18nName: 'i18n', // --> appends $.i18n = i18next
+	handleName: 'i18n' // --> appends $(selector).localize(opts);
+});
 
 const isReady = new Promise((resolve, reject) => {
 	i18next.use(LanguageDetector).init({

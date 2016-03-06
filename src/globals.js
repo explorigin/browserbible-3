@@ -1,6 +1,5 @@
 import i18n from './i18n.js';
 import $ from 'jQuery';
-import i18nextJquery from 'jquery-i18next/lib/index';
 import XRegExp from 'xregexp';
 import ZeroClipboard from 'zeroclipboard';
 import ZeroClipboardSWF from 'file!zeroclipboard/dist/ZeroClipBoard.swf';
@@ -18,11 +17,6 @@ window['$'] = $;
 
 // i18n
 window.i18n = i18n;
-i18nextJquery.init(i18n.ext, $, {
-	tName: 't', // --> appends $.t = i18next.t
-	i18nName: 'i18n', // --> appends $.i18n = i18next
-	handleName: 'i18n' // --> appends $(selector).localize(opts);
-});
 
 // ZeroClipboard
 window['ZeroClipboard'] = ZeroClipboard;
