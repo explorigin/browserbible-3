@@ -42,7 +42,6 @@ var ConfigUrl = function(node) {
 
 
 	if (Detection.hasFlash) {
-		ZeroClipboard.config( { moviePath: sofia.config.baseContentUrl + 'build/ZeroClipboard.swf' } );
 		for (var c in clickables) {
 			var el = clickables[c];
 

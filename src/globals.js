@@ -2,6 +2,8 @@ import i18n from './i18n.js';
 import $ from 'jQuery';
 import i18nextJquery from 'jquery-i18next/lib/index';
 import XRegExp from 'xregexp';
+import ZeroClipboard from 'zeroclipboard';
+import ZeroClipboardSWF from 'file!zeroclipboard/dist/ZeroClipBoard.swf';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -21,3 +23,7 @@ i18nextJquery.init(i18n.ext, $, {
 	i18nName: 'i18n', // --> appends $.i18n = i18next
 	handleName: 'i18n' // --> appends $(selector).localize(opts);
 });
+
+// ZeroClipboard
+window['ZeroClipboard'] = ZeroClipboard;
+ZeroClipboard.config({moviePath: ZeroClipboardSWF});
