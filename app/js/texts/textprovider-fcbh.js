@@ -259,7 +259,7 @@ sofia.textproviders['fcbh'] = (function() {
 							vnum = verse.verse_id,
 							vid = sectionid + '_' + vnum;
 
-						html.push('<span class="v-num v-' + vnum + '">' + vnum + '&nbsp;</span><span class="v ' + vid + '" data-id="' + vid + '">' + text + '</span>');
+						html.push('<span class="v-num v-' + vnum + '">' + vnum + '</span>&nbsp;<span class="v ' + vid + '" data-id="' + vid + '">' + text + '</span>');
 
 					}
 

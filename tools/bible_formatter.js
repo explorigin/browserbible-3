@@ -149,7 +149,7 @@ var bibleFormatter = {
 
 
 	openVerse: function(dbsVerseCode, verseNumber) {
-		return 	(typeof verseNumber != 'undefined' && verseNumber != null ? '<span class="v-num v-' + verseNumber + '">' + verseNumber + '&nbsp;</span>' : '') +
+		return 	(typeof verseNumber != 'undefined' && verseNumber != null ? '<span class="v-num v-' + verseNumber + '">' + verseNumber + '</span>&nbsp;' : '') +
 				'<span class="v ' + dbsVerseCode + '" data-id="' + dbsVerseCode + '">';
 	},
 
