@@ -5,6 +5,21 @@ import LanguageDetector from 'i18next-browser-languagedetector/lib/index';
 
 // Internationalization: i18n
 
+const WebpackLoaderBackend = {
+	type: 'backend',
+	init: (services, options = {}) => { },
+
+	read: (language, namespace, callback) => {
+		const langSplit = language.split('-');
+		if (langSplit[0] != 'zh') {
+			language = langSplit[0];
+		}
+		require(`./resources/${language}.js`)().then((data) => {
+			callback(null, data[namespace]);
+		});
+	}
+};
+
 i18nextJquery.init(i18next, $, {
 	tName: 't', // --> appends $.t = i18next.t
 	i18nName: 'i18n', // --> appends $.i18n = i18next
@@ -12,7 +27,7 @@ i18nextJquery.init(i18next, $, {
 });
 
 const isReady = new Promise((resolve, reject) => {
-	i18next.use(LanguageDetector).init({
+	i18next.use(LanguageDetector).use(WebpackLoaderBackend).init({
 		fallbackLng: sofia.config.defaultLanguage,
 		detection: {
 			order: ['querystring', 'cookie', 'localStorage', 'navigator'],
@@ -20,8 +35,7 @@ const isReady = new Promise((resolve, reject) => {
 			lookupCookie: 'i18next',
 			lookupLocalStorage: 'i18nextLng',
 			caches: ['localStorage', 'cookie']
-		},
-		resources: sofia.resources
+		}
 	}, (err, t) => {
 		if (err) {
 			reject(err);

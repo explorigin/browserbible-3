@@ -21,12 +21,16 @@ module.exports = {
 		module: {
 			preLoaders: [
 				{
-					test: /\.js?$/,
+					test: /(^resources\/)\.js?$/,
 					exclude: /node_modules/,
 					loader: 'eslint-loader'
 				}
 			],
 			loaders: [
+				{
+				  test: /resources\/.*\.js$/,
+				  loader: 'promise?global,[name].js'
+				},
 				{
 					test: /\.js?$/,
 					exclude: /node_modules/,

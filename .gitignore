@@ -4,10 +4,8 @@ app/index.html
 app/*.swf
 app/commons.js
 app/commons.js.map
-app/globals.bundle.js
-app/globals.bundle.js.map
-app/main.bundle.js
-app/main.bundle.js.map
+app/*.bundle.js
+app/*.bundle.js.map
 app/content/texts/*
 !app/content/texts/README.md
 **/node_modules/
