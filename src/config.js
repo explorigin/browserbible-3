@@ -1,4 +1,4 @@
-sofia.config = {
+export default {
 
 	// Change this to clear all user settings
 	settingsPrefix: '20140307',
@@ -71,11 +71,12 @@ sofia.config = {
 	fcbhLoadVersions: false,
 
 	// jesus film media
-	jfmKey: ''
-};
+	jfmKey: '',
 
-sofia.customConfigs = {
-	"dbs": {
-		customCssUrl: 'dbs.css'
+	// Profiles
+	profiles: {
+		dbs: {
+			customCssUrl: 'dbs.css'
+		}
 	}
 };

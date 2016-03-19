@@ -2,6 +2,7 @@ import $ from 'jQuery';
 import i18next from 'i18next';
 import i18nextJquery from 'jquery-i18next/lib/index';
 import LanguageDetector from 'i18next-browser-languagedetector/lib/index';
+import config from './config';
 
 // Internationalization: i18n
 
@@ -14,7 +15,7 @@ const WebpackLoaderBackend = {
 		if (langSplit[0] != 'zh') {
 			language = langSplit[0];
 		}
-		require(`./resources/${language}.js`)().then((data) => {
+		require(`./resources/${language}`)().then((data) => {
 			callback(null, data[namespace]);
 		});
 	}
@@ -28,7 +29,7 @@ i18nextJquery.init(i18next, $, {
 
 const isReady = new Promise((resolve, reject) => {
 	i18next.use(LanguageDetector).use(WebpackLoaderBackend).init({
-		fallbackLng: sofia.config.defaultLanguage,
+		fallbackLng: config.defaultLanguage,
 		detection: {
 			order: ['querystring', 'cookie', 'localStorage', 'navigator'],
 			lookupQuerystring: 'lng',

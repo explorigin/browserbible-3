@@ -13,7 +13,9 @@
     "build:index": "node tools/create_texts_index.js",
     "build:deafbibles": "node tools/generatedeafbibles.js",
     "build:content": "npm run build:texts && npm run build:deafbibles && npm run build:index",
-    "build": "webpack && node tools/builder.js"
+    "build:languageindex": "node tools/buildlanguageindex.js",
+    "build": "webpack && node tools/builder.js",
+    "dev": "webpack-dev-server --progress --profile --colors"
   },
   "dependencies": {
     "babel-core": "6.4.5",
@@ -51,5 +53,7 @@
     "xregexp": "^3.1.0",
     "zeroclipboard": "^2.2.0"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-dev-server": "^1.14.1"
+  }
 }

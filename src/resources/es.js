@@ -1,6 +1,6 @@
 define({
 	"translation": {
-		"name": "español",
+		"name": "Español",
 		"menu": {
 			"search": {
 				"placeholder": "Búsqueda"

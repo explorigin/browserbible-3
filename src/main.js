@@ -1,5 +1,7 @@
-import i18n from './i18n.js';
+import i18n from './i18n';
 import $ from 'jQuery';
+import config from './config';
+import sofia from './namespace';
 
 
 function runInit() {
@@ -30,16 +32,16 @@ function init() {
 		isiOSApp = (ua.indexOf('ipad') > -1 || ua.indexOf('iphone') > -1) && window.location.protocol === 'file:';
 
 	if (custom !== undefined && custom !== '') {
-		var customizations = sofia.customConfigs[custom];
+		let customizations = config.profiles[custom];
 
 		if (custom !== undefined && customizations != null) {
-			sofia.config = $.extend(sofia.config, customizations);
+			Object.assign(config, customizations);
 		}
 	}
 
 	// load css
-	if (typeof sofia.config.customCssUrl != 'undefined' && sofia.config.customCssUrl != '') {
-		$('<link href="' + sofia.config.customCssUrl + '" rel="stylesheet" />').appendTo( $('head') );
+	if (typeof config.customCssUrl != 'undefined' && config.customCssUrl != '') {
+		$(`<link href="${config.customCssUrl}" rel="stylesheet" />`).appendTo( $('head') );
 	}
 
 	if (window.navigator.standalone === true || isiOSApp) {

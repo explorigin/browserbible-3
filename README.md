@@ -29,4 +29,10 @@ To create a "build" version, you'll need uglify-js
 
 1. Install dependencies (if you haven't already): `npm install`
 2. Copy `app/js/core/config-custom-example.js` to `config-custom.js` and modify to your needs.
-3. Run `node run build` (creates build files to use with index-build.html)
+3. Run `npm run build` (creates build files to use with index-build.html)
+
+## Adding Translations
+
+1. Copy one of the resource files under `src/resources` to a new file named with the 2-character ISO code for your target new language.
+2. Replace the translations in this new resource file with your own for the new translation.
+3. Run `npm run build:languageindex` and then `npm run build`. Your new translation should be integrated into the code.

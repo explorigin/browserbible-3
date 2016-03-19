@@ -1,4 +1,5 @@
-import i18n from './i18n.js';
+import i18n from './i18n';
+import sofia from './namespace';
 import $ from 'jQuery';
 import XRegExp from 'xregexp';
 import ZeroClipboard from 'zeroclipboard';
@@ -20,4 +21,7 @@ window.i18n = i18n;
 
 // ZeroClipboard
 window['ZeroClipboard'] = ZeroClipboard;
-ZeroClipboard.config({moviePath: ZeroClipboardSWF});
+ZeroClipboard.config({swfPath: ZeroClipboardSWF});
+
+// Legacy modules look for lost of data in the global namespace
+window['sofia'] = sofia;

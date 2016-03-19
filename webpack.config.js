@@ -21,15 +21,16 @@ module.exports = {
 		module: {
 			preLoaders: [
 				{
-					test: /(^resources\/)\.js?$/,
-					exclude: /node_modules/,
+					test: /\.js?$/,
+					exclude: /(node_modules|\/src\/resources\/)/,
 					loader: 'eslint-loader'
 				}
 			],
 			loaders: [
 				{
 				  test: /resources\/.*\.js$/,
-				  loader: 'promise?global,[name].js'
+				  loader: 'promise?global,[name].js',
+				  exclude: /index\.js/,
 				},
 				{
 					test: /\.js?$/,
@@ -59,5 +60,12 @@ module.exports = {
 					"warnings": false
 				}
 			})
-		])
+		]),
+		devServer: {
+				contentBase: "./app",
+				noInfo: true,
+				hot: false,
+				inline: true,
+				port: 9090
+		}
 };

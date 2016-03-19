@@ -17,7 +17,7 @@ var LanguageSetting = function(node) {
 		body = $('#config-tools .config-body'),
 		list = $('<select id="config-language" class="app-list"></select>')
 					.appendTo(body),
-		langKeys = Object.keys(sofia.resources);
+		langKeys = Object.keys(sofia.languages);
 
 	body.append($('<div class="clear"></div>'));
 
@@ -26,7 +26,7 @@ var LanguageSetting = function(node) {
 
 	for(var i=0, il=langKeys.length; i<il; i++) {
 		var langKey = langKeys[i],
-			langName = sofia.resources[langKey].translation.name;
+			langName = sofia.languages[langKey].name;
 
 		$('<option value="' + langKey + '">' + langName + '</option>')
 			.appendTo(list);
@@ -49,8 +49,8 @@ var LanguageSetting = function(node) {
 		// go through options and add new info
 		list.children('option').each(function() {
 			var option = $(this),
-				langValue = option.attr('value');
-				resourceData = sofia.resources[langValue].translation,
+				langValue = option.attr('value'),
+				resourceData = sofia.languages[langValue],
 				name = resourceData.name,
 				fallbackName = resourceData.names[sofia.config.languageSelectorFallbackLang],
 				localizedName = resourceData.names[usersLanguage],
@@ -65,7 +65,7 @@ var LanguageSetting = function(node) {
 				fullname += ' (' + fallbackName + ')';
 			}
 
-			option.html(fullname);
+			option.text(fullname);
 		});
 	}
 
