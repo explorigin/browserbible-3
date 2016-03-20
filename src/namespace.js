@@ -1,4 +1,5 @@
 import config from './config';
+import ajax from './common/ajax';
 import languages from './resources/index';
 
 export default {
@@ -9,5 +10,6 @@ export default {
 	'initMethods': [],
 	'globals': {},
 	config,
-	languages
+	languages,
+	ajax
 };
