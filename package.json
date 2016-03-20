@@ -14,7 +14,7 @@
     "build:deafbibles": "node tools/generatedeafbibles.js",
     "build:content": "npm run build:texts && npm run build:deafbibles && npm run build:index",
     "build:languageindex": "node tools/buildlanguageindex.js",
-    "build": "webpack && node tools/builder.js",
+    "build": "NODE_ENV=production webpack && node tools/builder.js",
     "dev": "webpack-dev-server --progress --profile --colors"
   },
   "dependencies": {
