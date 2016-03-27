@@ -1,5 +1,9 @@
+import $ from 'jQuery';
+
+import EventEmitter from './eventlistener';
+
 /* temporarily stores locations when settings are changed */
-var PlaceKeeper = (function() {
+export var PlaceKeeper = (function() {
 
 	var currentWindow = null,
 		currentData = null;
@@ -10,7 +14,7 @@ var PlaceKeeper = (function() {
 
 	function getFirstLocation() {
 		currentWindow = (sofia.app.windowManager) ?
-							sofia.app.windowManager.getWindows().filter(function(w) { return w.className == 'BibleWindow'})[0] :
+							sofia.app.windowManager.getWindows().filter(function(w) { return w.className == 'BibleWindow';  })[0] :
 							null;
 
 		var data = (currentWindow != null) ? currentWindow.getData() : null;
@@ -40,12 +44,12 @@ var PlaceKeeper = (function() {
 		storePlace: storePlace,
 		restorePlace: restorePlace,
 		getFirstLocation: getFirstLocation
-	}
+	};
 
 })();
 
 /* stores locations for back/foward buttons on browser */
-var TextNavigation = (function() {
+export var TextNavigation = (function() {
 
 	var locations = [],
 		locationIndex = -1;
@@ -84,7 +88,7 @@ var TextNavigation = (function() {
 		locations.push(locationid);
 		locationIndex = 0;
 
-		window.history.replaceState({"locationid": locationid}, null, window.location.href);
+		window.history.replaceState({'locationid': locationid}, null, window.location.href);
 	}
 
 	// each additional change
@@ -98,7 +102,7 @@ var TextNavigation = (function() {
 		locations.push(locationid);
 		locationIndex++;
 
-		window.history.pushState({"locationid": locationid}, null, window.location.href);
+		window.history.pushState({'locationid': locationid}, null, window.location.href);
 
 
 		textNavigation.trigger('locationchange', {type: type});
@@ -169,7 +173,7 @@ var TextNavigation = (function() {
 		back: back,
 		getLocationIndex: getLocationIndex,
 		getLocations: getLocations
-	}
+	};
 
 	textNavigation = $.extend(true, textNavigation, EventEmitter);
 

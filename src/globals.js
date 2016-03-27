@@ -6,10 +6,11 @@ import ZeroClipboardSWF from 'file!zeroclipboard/dist/ZeroClipBoard.swf';
 import i18n from './i18n';
 import sofia from './namespace';
 import * as settings from './common/appsettings';
-import EventEmitter from  './common/eventlistener';
+import EventEmitter from './common/eventlistener';
 import Timer from './common/timer';
 import parseQuerystring from './common/stringutility';
 import * as Detection from './common/detection';
+import { PlaceKeeper, TextNavigation } from './common/navigation';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -41,3 +42,6 @@ window['Timer'] = Timer;
 window['stringUtility'] = { parseQuerystring };
 
 window['Detection'] = Detection;
+
+window['PlaceKeeper'] = PlaceKeeper;
+window['TextNavigation'] = TextNavigation;
