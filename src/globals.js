@@ -9,6 +9,7 @@ import * as settings from './common/appsettings';
 import EventEmitter from  './common/eventlistener';
 import Timer from './common/timer';
 import parseQuerystring from './common/stringutility';
+import * as Detection from './common/detection';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -38,3 +39,5 @@ window['EventEmitter'] = EventEmitter;
 window['Timer'] = Timer;
 
 window['stringUtility'] = { parseQuerystring };
+
+window['Detection'] = Detection;
