@@ -1,4 +1,6 @@
-var ClickOff = {
+import $ from 'jQuery';
+
+export default {
 
 	clickoffid: '',
 	clickTargets:[],
