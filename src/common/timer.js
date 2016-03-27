@@ -1,5 +1,5 @@
 
-var Timer = function(callback, seconds) {
+export default function Timer(callback, seconds) {
 
 	var timeoutValue = null;
 	function start() {
@@ -22,5 +22,5 @@ var Timer = function(callback, seconds) {
 	return {
 		start: start,
 		clear: clear
-	}
+	};
 };

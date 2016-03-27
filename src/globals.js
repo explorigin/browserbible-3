@@ -7,6 +7,7 @@ import i18n from './i18n';
 import sofia from './namespace';
 import * as settings from './common/appsettings';
 import EventEmitter from  './common/eventlistener';
+import Timer from  './common/timer';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -32,3 +33,5 @@ window['sofia'] = sofia;
 window['AppSettings'] = settings;
 
 window['EventEmitter'] = EventEmitter;
+
+window['Timer'] = Timer;
