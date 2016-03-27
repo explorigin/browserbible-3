@@ -1,4 +1,4 @@
-var EventEmitter = {
+export default {
 	events: [],
 
 	addEventListener: function (eventName, callback, bubble) {

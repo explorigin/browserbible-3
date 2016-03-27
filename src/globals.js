@@ -6,6 +6,7 @@ import ZeroClipboardSWF from 'file!zeroclipboard/dist/ZeroClipBoard.swf';
 import i18n from './i18n';
 import sofia from './namespace';
 import * as settings from './common/appsettings';
+import EventEmitter from  './common/eventlistener';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -29,3 +30,5 @@ ZeroClipboard.config({swfPath: ZeroClipboardSWF});
 window['sofia'] = sofia;
 
 window['AppSettings'] = settings;
+
+window['EventEmitter'] = EventEmitter;
