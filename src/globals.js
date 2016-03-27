@@ -1,9 +1,11 @@
-import i18n from './i18n';
-import sofia from './namespace';
 import $ from 'jQuery';
 import XRegExp from 'xregexp';
 import ZeroClipboard from 'zeroclipboard';
 import ZeroClipboardSWF from 'file!zeroclipboard/dist/ZeroClipBoard.swf';
+
+import i18n from './i18n';
+import sofia from './namespace';
+import * as settings from './common/appsettings';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -25,3 +27,5 @@ ZeroClipboard.config({swfPath: ZeroClipboardSWF});
 
 // Legacy modules look for lost of data in the global namespace
 window['sofia'] = sofia;
+
+window['AppSettings'] = settings;
