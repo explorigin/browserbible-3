@@ -11,6 +11,7 @@ import Timer from './common/timer';
 import parseQuerystring from './common/stringutility';
 import * as Detection from './common/detection';
 import { PlaceKeeper, TextNavigation } from './common/navigation';
+import { convert } from './common/iso2iana';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -45,3 +46,5 @@ window['Detection'] = Detection;
 
 window['PlaceKeeper'] = PlaceKeeper;
 window['TextNavigation'] = TextNavigation;
+
+window['iso2iana'] = { convert };
