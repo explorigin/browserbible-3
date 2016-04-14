@@ -1,14 +1,17 @@
+import $ from 'jQuery';
+import ajax from '../common/ajax';
+import config from '../config';
 
-sofia.textproviders['local'] = (function() {
+const LocalProvider = (function() {
 
 	var providerName = 'local',
 		fullName = '',
 		textData = {};
 
 	function getTextManifest(callback) {
-		var textsUrl = 'content/texts/' + sofia.config.textsIndexPath;
+		var textsUrl = 'content/texts/' + config.textsIndexPath;
 
-		sofia.ajax({
+		ajax({
 			url: textsUrl,
 			dataType: 'json',
 			cache: false,
@@ -29,7 +32,7 @@ sofia.textproviders['local'] = (function() {
 
 				modal.body.css({background: '#000', color: '#fff' }).html(
 					'<div style="padding: 20px;">' +
-						'<p>Problem loading <code>' + sofia.config.baseContentUrl + textsUrl + '</code></p>' +
+						'<p>Problem loading <code>' + config.baseContentUrl + textsUrl + '</code></p>' +
 						'<p>Status: ' + textStatus + '</p>'+
 						'<p>Error: ' + errorThrown + '</p>'+
 					'</div>'
@@ -50,7 +53,7 @@ sofia.textproviders['local'] = (function() {
 		// load it!
 		var infoUrl = 'content/texts/' + textid + '/info.json';
 
-		sofia.ajax({
+		ajax({
 			url: infoUrl,
 			dataType: 'json',
 			success: function(data) {
@@ -59,7 +62,7 @@ sofia.textproviders['local'] = (function() {
 			},
 			error: function(error) {
 
-				console.log("ERROR TextInfoLoader.getText", infoUrl);
+				console.log('ERROR TextInfoLoader.getText', infoUrl);
 
 				if (errorCallback) {
 					errorCallback(error);
@@ -74,7 +77,7 @@ sofia.textproviders['local'] = (function() {
 
 			var url = 'content/texts/' + textid + '/' + sectionid + '.html';
 
-			sofia.ajax({
+			ajax({
 				dataType: 'text',
 				url: url,
 				success: function(data) {
@@ -157,30 +160,8 @@ sofia.textproviders['local'] = (function() {
 		loadSection: loadSection,
 		startSearch: startSearch,
 		fullName: fullName
-	}
+	};
 
 })();
 
-/*
-sofia.textproviders['example'] = (function() {
-
-	function getTextManifest (callback) {
-		callback({});
-	}
-
-	function getTextInfo(textid, callback) {
-		callback({});
-	}
-
-	function loadSection(textid, sectionid, callback) {
-		callback(null);
-	}
-
-	return {
-		getTextManifest: getTextManifest,
-		getTextInfo: getTextInfo,
-		loadSection: loadSection
-	}
-
-})();
-*/
+export default LocalProvider;

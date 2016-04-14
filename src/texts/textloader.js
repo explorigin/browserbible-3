@@ -1,6 +1,10 @@
 import $ from 'jQuery';
 import namespace from '../namespace';
 
+import LocalProvider from './textprovider-local';
+
+namespace.textproviders['local'] = LocalProvider;
+
 const TextLoader = (function() {
 
 	var
