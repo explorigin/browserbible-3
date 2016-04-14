@@ -9,6 +9,8 @@ export default {
 	'menuComponents': [],
 	'initMethods': [],
 	'globals': {},
+	'textproviders': {},
+	// 'analytics': {}, // TODO - see texts/textloader.js
 	config,
 	languages,
 	ajax

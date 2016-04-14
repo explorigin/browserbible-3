@@ -13,6 +13,7 @@ import * as Detection from './common/detection';
 import { PlaceKeeper, TextNavigation } from './common/navigation';
 import { convert } from './common/iso2iana';
 import ClickOff from './common/clickoff';
+import TextLoader from './texts/textloader';
 
 // While we are only partially implemented, some tools that exist in in modules
 // must be exposed as globals so that old code can reference them where they
@@ -51,3 +52,5 @@ window['TextNavigation'] = TextNavigation;
 window['iso2iana'] = { convert };
 
 window['ClickOff'] = ClickOff;
+
+window['TextLoader'] = TextLoader;

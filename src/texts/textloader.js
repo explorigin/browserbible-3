@@ -1,6 +1,7 @@
-sofia.textproviders = {};
+import $ from 'jQuery';
+import namespace from '../namespace';
 
-TextLoader = (function() {
+const TextLoader = (function() {
 
 	var
 		textInfoDataIsLoading = false,
@@ -44,8 +45,8 @@ TextLoader = (function() {
 		}
 
 		// send analytics for loading
-		if (sofia.analytics && sofia.analytics.record) {
-			sofia.analytics.record('load', textInfo.id, sectionid);
+		if (namespace.analytics && namespace.analytics.record) {
+			namespace.analytics.record('load', textInfo.id, sectionid);
 		}
 
 		// use stored text if present
@@ -59,7 +60,7 @@ TextLoader = (function() {
 
 
 		// load from provider
-		sofia.textproviders[textInfo.providerName].loadSection(textid, sectionid, function(html) {
+		namespace.textproviders[textInfo.providerName].loadSection(textid, sectionid, function(html) {
 
 			// store
 			cachedTexts[textid][sectionid] = html;
@@ -89,8 +90,8 @@ TextLoader = (function() {
 
 		if (providerName == '') {
 			var textInfo = textInfoData.filter(function(info) {
-					return info.id == textid;
-				})[0];
+				return info.id == textid;
+			})[0];
 
 			if (textInfo && typeof textInfo.providerName != 'undefined') {
 				providerName = textInfo.providerName;
@@ -136,17 +137,13 @@ TextLoader = (function() {
 			textid = getTextid(textid);
 
 
-		sofia.textproviders[providerName].getTextInfo(textid, function(data) {
+		namespace.textproviders[providerName].getTextInfo(textid, function(data) {
 
 			var initialInfo = textInfoData[textid];
 			data = $.extend({}, initialInfo, data, true);
 
 
-			processText(data, providerName)
-			//data.providerName = providerName;
-
-
-
+			processText(data, providerName);
 
 
 			// store
@@ -184,15 +181,15 @@ TextLoader = (function() {
 
 		textInfoDataIsLoading = true;
 
-		var providerKeys = Object.keys(sofia.textproviders),
+		var providerKeys = Object.keys(namespace.textproviders),
 			currentProviderIndex = 0;
 
 		function loadNextProvider() {
 			if (currentProviderIndex < providerKeys.length) {
 
-				var providerName = providerKeys[currentProviderIndex]
+				var providerName = providerKeys[currentProviderIndex];
 
-				sofia.textproviders[providerName].getTextManifest(function(data) {
+				namespace.textproviders[providerName].getTextManifest(function(data) {
 
 					if (data && data != null) {
 
@@ -246,7 +243,7 @@ TextLoader = (function() {
 		if (typeof text.country != 'undefined' && typeof text.countries == 'undefined' && text.country != text.langName && text.country != text.langNameEnglish) {
 			text.countries = [];
 
-			var possibleCountryMatches = sofia.countries.filter(function(c) {
+			var possibleCountryMatches = namespace.countries.filter(function(c) {
 				return c.name.indexOf(text.country) == 0;
 			});
 
@@ -260,7 +257,7 @@ TextLoader = (function() {
 
 		var providerName = getProviderName(textid);
 
-		sofia.textproviders[providerName].startSearch(textid, divisions, searchTerms, onSearchLoad, onSearchIndexComplete, onSearchComplete);
+		namespace.textproviders[providerName].startSearch(textid, divisions, searchTerms, onSearchLoad, onSearchIndexComplete, onSearchComplete);
 
 	}
 
@@ -282,7 +279,9 @@ TextLoader = (function() {
 		startSearch: startSearch,
 		processTexts: processTexts,
 		processText: processText
-	}
+	};
 
 	return ext;
 })();
+
+export default TextLoader;
