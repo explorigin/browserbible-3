@@ -1,18 +1,8 @@
-sofia.config = $.extend(sofia.config, {
+import $ from 'jQuery';
+import ajax from '../common/ajax';
+import config from '../config';
 
-	enableAmericanBibleSociety: true,
-
-	absUrl: 'abs.php',
-
-	absForceLoadVersions: false,
-
-	absExclusions: []
-
-});
-
-
-
-sofia.textproviders['abs'] = (function() {
+const AmericanBibleSocietyProvider = (function() {
 
 	var text_data = [],
 		text_data_is_loaded = false,
@@ -27,18 +17,15 @@ sofia.textproviders['abs'] = (function() {
 	function getTextManifest (callback) {
 
 		// check for offline use
-		if (!sofia.config.enableOnlineSources || !sofia.config.enableAmericanBibleSociety || sofia.config.absUrl == '') {
+		if (!config.enableOnlineSources || !config.enableAmericanBibleSociety || config.absUrl == '') {
 			callback(null);
 			return;
 		}
 
 		// if loaded immediately callback
 		if (text_data_is_loaded) {
-
 			callback(text_data);
-
 		} else {
-
 			// store callback
 			text_data_callbacks.push(callback);
 
@@ -49,8 +36,8 @@ sofia.textproviders['abs'] = (function() {
 
 			text_data_is_loading = true;
 
-			$.ajax({
-				url: sofia.config.baseContentUrl + sofia.config.absUrl,
+			ajax({
+				url: config.baseContentUrl + config.absUrl,
 				dataType: 'jsonp',
 				beforeSend:  function(xhr){
 					if (xhr.overrideMimeType) {
@@ -60,7 +47,7 @@ sofia.textproviders['abs'] = (function() {
 				cache: false,
 				data: {
 					action: 'list',
-					force: sofia.config.absForceLoadVersions
+					force: config.absForceLoadVersions
 				},
 				success: function(data) {
 
@@ -72,9 +59,9 @@ sofia.textproviders['abs'] = (function() {
 					text_data = data.textInfoData;
 
 					// remove versions you don't want
-					if (sofia.config.absExclusions && sofia.config.absExclusions.length > 0) {
+					if (config.absExclusions && config.absExclusions.length > 0) {
 						text_data = text_data.filter(function(text) {
-							return sofia.config.absExclusions.indexOf(text.id) == -1;
+							return config.absExclusions.indexOf(text.id) == -1;
 						});
 					}
 
@@ -127,8 +114,8 @@ sofia.textproviders['abs'] = (function() {
 
 		if (typeof info.divisions == 'undefined' || info.divisions.length == 0) {
 
-			$.ajax({
-				url: sofia.config.baseContentUrl + sofia.config.absUrl,
+			ajax({
+				url: config.baseContentUrl + config.absUrl,
 				dataType: 'jsonp',
 				beforeSend:  function(xhr){
 					if (xhr.overrideMimeType) {
@@ -189,8 +176,8 @@ sofia.textproviders['abs'] = (function() {
 			previd = sectionIndex > 0 ? textinfo.sections[sectionIndex-1] : null,
 			nextid = sectionIndex < textinfo.sections.length ? textinfo.sections[sectionIndex+1] : null;
 
-		$.ajax({
-			url: sofia.config.baseContentUrl + sofia.config.absUrl,
+		ajax({
+			url: config.baseContentUrl + config.absUrl,
 			dataType: 'jsonp',
 			beforeSend:  function(xhr){
 				if (xhr.overrideMimeType) {
@@ -212,25 +199,15 @@ sofia.textproviders['abs'] = (function() {
 				bookname: textinfo.divisionNames[textinfo.divisions.indexOf(dbsBookCode)]
 			},
 			success: function(data) {
-
 				callback(data.html);
-
-
 				if (!fums_loaded) {
-
 					$.getScript('//' + data.fums_js_include, function() {
 						fums_loaded = true;
-
 						eval(data.fums_js);
-
 					});
-
 				} else {
-
 					eval(data.fums_js);
-
 				}
-
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
 				callback(null);
@@ -253,8 +230,8 @@ sofia.textproviders['abs'] = (function() {
 				}
 			};
 
-		$.ajax({
-			url: sofia.config.baseContentUrl + sofia.config.absUrl,
+		ajax({
+			url: config.baseContentUrl + config.absUrl,
 			dataType: 'jsonp',
 			beforeSend:  function(xhr){
 				if (xhr.overrideMimeType) {
@@ -317,7 +294,6 @@ sofia.textproviders['abs'] = (function() {
 					}
 				});
 
-
 				onSearchComplete(e);
 
 				if (!fums_loaded) {
@@ -369,6 +345,8 @@ sofia.textproviders['abs'] = (function() {
 		loadSection: loadSection,
 		startSearch: startSearch,
 		fullName: fullName
-	}
+	};
 
 })();
+
+export default AmericanBibleSocietyProvider;

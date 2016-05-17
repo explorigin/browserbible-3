@@ -78,5 +78,13 @@ export default {
 		dbs: {
 			customCssUrl: 'dbs.css'
 		}
-	}
+	},
+
+	enableAmericanBibleSociety: true,
+
+	absUrl: 'abs.php',
+
+	absForceLoadVersions: false,
+
+	absExclusions: []
 };

@@ -2,8 +2,10 @@ import $ from 'jQuery';
 import namespace from '../namespace';
 
 import LocalProvider from './textprovider-local';
+import ABSProvider from './textprovider-abs';
 
 namespace.textproviders['local'] = LocalProvider;
+namespace.textproviders['abs'] = ABSProvider;
 
 const TextLoader = (function() {
 
