@@ -3,9 +3,11 @@ import namespace from '../namespace';
 
 import LocalProvider from './textprovider-local';
 import ABSProvider from './textprovider-abs';
+import FCBHProvider from './textprovider-fcbh';
 
 namespace.textproviders['local'] = LocalProvider;
 namespace.textproviders['abs'] = ABSProvider;
+namespace.textproviders['fcbh'] = FCBHProvider;
 
 const TextLoader = (function() {
 

@@ -1,5 +1,8 @@
+import $ from 'jQuery';
+import ajax from '../common/ajax';
+import config from '../config';
 
-sofia.textproviders['fcbh'] = (function() {
+const FaithComesByHearingProvider = (function() {
 
 	var text_data = [],
 		text_data_is_loaded = false,
@@ -11,7 +14,7 @@ sofia.textproviders['fcbh'] = (function() {
 	function getTextManifest (callback) {
 
 		// check for offline use
-		if (!sofia.config.enableOnlineSources || typeof sofia.config.fcbhKey == 'undefined' || sofia.config.fcbhKey == '') {
+		if (!config.enableOnlineSources || typeof config.fcbhKey == 'undefined' || config.fcbhKey == '') {
 			callback(null);
 			return;
 		}
@@ -34,7 +37,7 @@ sofia.textproviders['fcbh'] = (function() {
 			text_data_is_loading = true;
 
 
-			sofia.ajax({
+			ajax({
 				url: 'content/texts/texts_fcbh.json',
 				dataType: 'json',
 				cache: false,
@@ -49,12 +52,12 @@ sofia.textproviders['fcbh'] = (function() {
 					}
 
 					// filter
-					if (sofia.config.fcbhTextExclusions && sofia.config.fcbhTextExclusions.length > 0) {
+					if (config.fcbhTextExclusions && config.fcbhTextExclusions.length > 0) {
 
 						text_data = text_data.filter(function(t) {
 
 							// keep the ones that aren't in the exclusion list
-							return sofia.config.fcbhTextExclusions.indexOf(t.id) == -1;
+							return config.fcbhTextExclusions.indexOf(t.id) == -1;
 
 						});
 
@@ -156,14 +159,14 @@ sofia.textproviders['fcbh'] = (function() {
 
 	function loadBooks(info, dam_id, callback) {
 
-		$.ajax({
+		ajax({
 			beforeSend: function(xhr){
 				if (xhr.overrideMimeType){
-					xhr.overrideMimeType("application/javascript");
+					xhr.overrideMimeType('application/javascript');
 				}
 			},
 			dataType: 'jsonp',
-			url: 'http://dbt.io/library/book?v=2&reply=jsonp&key=' + sofia.config.fcbhKey + '&dam_id=' + dam_id,
+			url: 'http://dbt.io/library/book?v=2&reply=jsonp&key=' + config.fcbhKey + '&dam_id=' + dam_id,
 			success: function(data) {
 
 				// push data onto info object
@@ -218,15 +221,15 @@ sofia.textproviders['fcbh'] = (function() {
 				dam_id = bible.OT_BOOKS.indexOf(bookid) > -1 ? textinfo.ot_dam_id : textinfo.nt_dam_id,
 				sectionIndex = textinfo.sections.indexOf(sectionid),
 				previd = sectionIndex > 0 ? textinfo.sections[sectionIndex-1] : null,
-				nextid = sectionIndex < textinfo.sections.length ? textinfo.sections[sectionIndex+1] : null;
-				url = 'http://dbt.io/library/verse?v=2&reply=jsonp&key=' + sofia.config.fcbhKey + '&dam_id=' + dam_id + '&book_id=' + usfmbook + '&chapter_id=' + chapter; // format=osis (sadly doesn't do anything)
+				nextid = sectionIndex < textinfo.sections.length ? textinfo.sections[sectionIndex+1] : null,
+				url = 'http://dbt.io/library/verse?v=2&reply=jsonp&key=' + config.fcbhKey + '&dam_id=' + dam_id + '&book_id=' + usfmbook + '&chapter_id=' + chapter; // format=osis (sadly doesn't do anything)
 
 			//console.log(url);
 
-			$.ajax({
+			ajax({
 				beforeSend: function(xhr){
 					if (xhr.overrideMimeType){
-						xhr.overrideMimeType("application/javascript");
+						xhr.overrideMimeType('application/javascript');
 					}
 				},
 				dataType: 'jsonp',
@@ -312,16 +315,16 @@ sofia.textproviders['fcbh'] = (function() {
 	}
 	function doSearch(dam_id, divisions, text, e, callback) {
 
-		$.ajax({
+		ajax({
 			beforeSend: function(xhr){
 				if (xhr.overrideMimeType){
-					xhr.overrideMimeType("application/javascript");
+					xhr.overrideMimeType('application/javascript');
 				}
 			},
 			dataType: 'jsonp',
 
 			// One giant call seems faster, than doing all the books individually?
-			url: 'http://dbt.io/text/search?v=2&reply=jsonp&key=' + sofia.config.fcbhKey + '&dam_id=' + dam_id + '&query=' + text.replace(/\s/gi, '+') + '&limit=2000',
+			url: 'http://dbt.io/text/search?v=2&reply=jsonp&key=' + config.fcbhKey + '&dam_id=' + dam_id + '&query=' + text.replace(/\s/gi, '+') + '&limit=2000',
 			success: function(data) {
 
 				for (var i=0, il=data[1].length; i<il; i++) {
@@ -367,6 +370,8 @@ sofia.textproviders['fcbh'] = (function() {
 		loadSection: loadSection,
 		startSearch: startSearch,
 		fullName: fullName
-	}
+	};
 
 })();
+
+export default FaithComesByHearingProvider;
